@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "young-ones-auth-client.v1.json",
+    "version": "1.0",
+    "description": "Young Ones Auth Client package API"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000",
+      "description": "Local"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "",
+        "operationId": "post-login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    },
+                    "expires_in": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Login to the auth server via the package",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/refresh": {
+      "post": {
+        "summary": "",
+        "operationId": "post-refresh",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    },
+                    "expires_in": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Refresh your access token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "access_token": []
+          }
+        ]
+      }
+    },
+    "/logout": {
+      "post": {
+        "summary": "",
+        "operationId": "post-logout",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "parameters": [],
+        "security": [
+          {
+            "access_token": []
+          }
+        ],
+        "description": ""
+      }
+    },
+    "/users/{user}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user",
+          "in": "path",
+          "required": true,
+          "description": "Can be 'me' or a UUID"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "User",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "email_verified_at": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users-user",
+        "parameters": [],
+        "security": [
+          {
+            "access_token": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "access_token": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": ""
+      }
+    },
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "email_verified_at": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
